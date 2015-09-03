@@ -1,0 +1,72 @@
+Lab1.java
+
+Part 3: original output
+
+i=5
+j=6
+k=127
+l=128
+m=255
+n=32767
+o=32768
+
+Part 3: altered output (changed iconst_5 to iconst_m1)
+i=-1
+j=6
+k=127
+l=128
+m=255
+n=32767
+o=32768
+
+
+bipush 254
+ldc -2
+
+Part4: original output
+i=-6000.53
+j=-2.1
+k=0.0
+l=5.0
+m=128.0
+n=5000.7
+o=65000.8
+
+ldc2_w -6000.53
+dstore_1
+ldc2_w -2.1
+dstore_3
+dconst_0
+dstore 5
+ldc2_w 5.0
+dstore 7
+ldc2_w 128.0
+dstore 9
+ldc2_w 5000.7
+dstore 11
+ldc2_w 65000.8
+dstore 13
+
+Part4: adjusted output
+i=-4000.2
+j=-256.4
+k=1.0
+l=9.3
+m=256.35
+n=6655.4
+o=128000.23
+
+ldc2_w -4000.2
+dstore_1
+ldc2_w -256.4
+dstore_3
+dconst_1
+dstore 5
+ldc2_w 9.3
+dstore 7
+ldc2_w 256.35
+dstore 9
+ldc2_w 6655.4
+dstore 11
+ldc2_w 128000.23
+dstore 13
