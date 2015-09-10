@@ -9,20 +9,12 @@
 //
 //*******************************************************************************
 
-public class Lab1Part4 {
+public class Lab1Part6 {
     public static void main(String[] args) {
-        double i = -6000.53, j = -2.1, k = 0, l = 5, m = 128, n = 5000.7, o = 65000.8;
-        System.out.println("i="+i);
-        System.out.println("j="+j);
-        System.out.println("k="+k);
-        System.out.println("l="+l);
-        System.out.println("m="+m);
-        System.out.println("n="+n);
-        System.out.println("o="+o);
-
-        int iSum = 5 + 5;
-        int iProduct = 5 * 5;
-        int iDifference = 5 - 5;
-        int iQuotient = 5 / 5;
+        int a = 6, b = 2;
+        int iSum = a + b;
+        int iProduct = a * b;
+        int iDifference = a - b;
+        int iQuotient = a / b;
     }
 }
