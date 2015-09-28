@@ -1,0 +1,45 @@
+javap -c JVMExample
+Compiled from "JVMExample.java"
+public class JVMExample {
+  public JVMExample();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public void f(int, int);
+    Code:
+       0: iload_1          // Load ("push") i (which is frame location 1)
+       1: iload_2          // Load ("push") j (which is in frame location 2)
+       2: imul             // Pop i and j, push i*j
+       3: istore_3         // Pop i*j, store it in x (frame location 3)
+       4: iload_1          // Push i
+       5: iload_2          // Push j
+       6: iadd             // Pop i and j, push i+j
+       7: istore        4  // Pop i+j, store it in y (frame location 4)
+       9: iload_3          // Push x
+      10: iload         4  // Push y
+      12: irem             // Pop x and y, push x%y
+      13: istore        5  // Pop x%y, store in rem (frame location 5)
+      15: iload_3          // Push x
+      16: iload         4  // Push y
+      18: iadd             // Pop x and y, push x+y
+      19: i2d              // Convert int on stack to double
+      20: ldc2_w        #2 // Push constant double 2.0d
+      23: ddiv		   // Pop x+y and 2.0, push (x+y)/2.0
+      24: dstore        6  // Pop (x+y)/2.0, store in avg (frame location 6)
+      26: return
+
+  public void g();
+    Code:
+       0: bipush        10 // Push integer constant 10
+       2: istore_1         // Pop 10, store it in a (frame location 1)
+       3: bipush        20 // Push integer constant 20
+       5: istore_2         // Pop 20, store it in b (frame location 2)
+       6: aload_0          // [Ignore--needed to identify object f belongs to]
+       7: iload_1          // Push a
+       8: iload_2          // Push b
+       9: invokevirtual #4 // Invoke method f with parameters a, b
+      12: return
+}
+

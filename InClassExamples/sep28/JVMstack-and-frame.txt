@@ -1,0 +1,41 @@
+When g is called, frame stack contains one frame, containing
+the parameters and local variables of function g:
+
++---------+
+|    b    | 2
++ - - - - +
+|    a    | 1
++ - - - - +
+|ret. add.|
++---------+
+
+
+When f is called from g, frame stack contains two frames: the frame
+for g (see above) and a frame containing the parameters and 
+local variables of f:
+
++---------+
+|   avg   | 6
++ - - - - +
+|   rem   | 5
++ - - - - +
+|    y    | 4
++ - - - - +
+|    x    | 3
++ - - - - +
+|    j    | 2
++ - - - - +
+|    i    | 1
++ - - - - +
+|ret. add.|
++---------+
++---------+
+|    b    | 2
++ - - - - +
+|    a    | 1
++ - - - - +
+|ret. add.|
++---------+
+
+As f executes, the instructions push and pop things onto the JVM
+computation stack (not to be confused with the frame stack).
