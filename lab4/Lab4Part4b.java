@@ -7,6 +7,8 @@
 
 public class Lab4Part4b {
     public static void main(String[] args) {
+
+        // Call the recur method using values 0 through 5 for both i and j
         for (int i = 0; i <= 5; i++) {
             for (int j = 0; j <= 5; j++) {
                 System.out.println("recur("+i+","+j+") = "+recur(i,j));
@@ -14,6 +16,7 @@ public class Lab4Part4b {
         }
     }
 
+    // Execute the recursive method invented and copyrighted by Dr. Roos.
     public static int recur(int i, int j) {
 
         // Base case #1
@@ -31,6 +34,5 @@ public class Lab4Part4b {
         // Recursive case
         else
             return 2 * recur(i - 1, j) + recur(j - 1, i);
-
     }
 }
