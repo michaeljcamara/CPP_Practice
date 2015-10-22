@@ -18,6 +18,7 @@ pulltofront l i =
  
 
 ------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 -- String Main Event! This will convert a given string into a series of "X"s and
@@ -63,8 +64,24 @@ isLowerCase c =
         2
 
 ------------------------------------------------------------------------
---
---
---
+------------------------------------------------------------------------
 
+------------------------------------------------------------------------
+--Numbers Main Event! This function will take a single positive integer as
+--input.  If the integer is small (<= 20) then the factorial will be
+--computer.  Otherwise, if it is even then the sum of the first x even
+--numbers will be taken.  If it is odd, then the sum of the first x
+--odd numbers will be taken. (For some reason if I replace the sum with
+--product for the set of evens or odds, the result is negative! Unsure why 
+--this is the case...)
+--------------------------------------------------------------------------
 
+sillymath x =
+    if (x <= 20) then
+        product [1..x]
+    else if (x `mod` 2 == 0) then
+        sum (take x [n | n <- [2..], n `mod` 2 == 0])
+    else if (x `mod` 2 == 1) then
+        sum (take x [n | n <- [1..], n `mod` 2 == 1])
+    else
+        0
