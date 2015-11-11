@@ -1,37 +1,12 @@
-/**
- * Bob Roos
- * Sample program to accompany lab 7
- *
- * Demonstration of functions as arguments to a function
- *
- * You will imitate this program in the lab assignment.
- */
+///////////////////////////////////////////////////////////////
+// Michael Camara
+// Honor Code Pledge: This work is mine unless otherwise cited
+// Lab 7: Functions, Part 2
+// Due Date: 11/12/15
+///////////////////////////////////////////////////////////////
+
 #include <stdio.h>
 #include <math.h>
-
-/********
- * sqr takes an integer x and returns  x squared.
- *******/
-int sqr(int x) { return x*x; }
-
-/********
- * cube takes an integer x and returns  x cubed.
- *******/
-int cube(int x) { return x*x*x; }
-
-/********
- * weird takes an integer x and returns  either x^2+x or 10x-x^2,
- * depending on whether x is less than 5 or not.
- *******/
-int weird(int x) { if (x < 5) return x*(x+1); else return x*(10-x); }
-
-/********
- * avg finds the average of f(a) and f(b) for some int-valued function f 
- * and two integers a and b.
- *******/
-double avg(int (*f)(int), int a, int b) {
-  return (f(a)+f(b))/2.0;
-}
 
 /**
  * f1 multiples the floor of x with the ceiling of x
@@ -41,8 +16,9 @@ int f1(double x) {
 }
 
 /** 
- * f2 finds the power of 2 that most closely matches the double, x
- * E.g. f2(70) = 64, since 2^6 (64) is closer to 70 than 2^7 (128)
+ * f2 finds the power of 2 that most closely matches the double, x.
+ * E.g. f2(70.5) = 64, since 70.5 is bounded by 2^6 (64) and 2^7 (128), and
+ * 64 is closer to 70.5 than 128.
  **/
 int f2(double x) {
 
@@ -79,22 +55,21 @@ int f3(double x) {
         return x / 10;
     }
 }
-
+/**
+ * calc takes the product of two values returned by the function, f.
+ * The first value uses f with the argument (a % 7 * 1.5), and the second
+ * value uses f with the argument (b * 3.3).  Scientists have yet to find
+ * a useful application for this function.
+ **/
 double calc(int (*f)(double), int a, int b) {
-    return f(a % 5) * f(b *3);
-
+    return f(a % 7 * 1.5) * f(b *3.3);
 }
 
+/**
+ * Use the calc function with a variety of values for f, a, and b.
+ **/
 int main() {
-    printf("avg of 15^2 and 20^2 is %f\n",avg(sqr,15,20));
-
-    printf("avg of 15^3 and 20^3 is %f\n",avg(cube,15,20));
-
-    printf("avg of weird(15) and weird(3) is %f\n",avg(weird,15,3));
-
-    printf("Closest power of two for 70 is %d\n",f2(3));
-
-    printf("Calc result using f1: %f\n", calc(f1, 500, 40));
-    printf("Calc result using f2: %f\n", calc(f2, 100, 35));
-    printf("Calc result using f3: %f\n", calc(f3, 10, 3));
+    printf("Use calc with f = f1, a = 509, b = 40: %f\n", calc(f1, 509, 40));
+    printf("Use calc with f = f2, a = 732, b = 17: %f\n", calc(f1, 732, 17));
+    printf("Use calc with f = f3, a = 37, b = 4: %f\n", calc(f1, 37, 4));
 }
