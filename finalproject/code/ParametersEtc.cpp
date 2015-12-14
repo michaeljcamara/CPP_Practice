@@ -1,9 +1,12 @@
-/*
+/*****************************************************************************
  * Michael Camara
- * CMPSC 220
- * Final Project
  * Honor Code Pledge: This work is mine unless otherwise cited
- */
+ * CMPSC220: Final Project (C++)
+ *
+ * Purpose: This file shows how parameter passing works in C++, as well as
+ * showing copy constructors and destructors and have they are used with
+ * "Resource Allocation Is Initialization" (RAII) in C++.
+ *****************************************************************************/
 #include <iostream>
 #include <time.h>
 #include <string>
@@ -11,21 +14,22 @@
 
 using namespace std;
 
+
 /**
- * Create a ReallyLargeObject that requires significant memory, then pass
- * that object to methods using pass-by-value, pass-by-reference, and pass
+ * Create a ReallyBigObject that requires significant memory, then pass
+ * that object to functions using pass-by-value, pass-by-reference, and pass
  * by const-reference techniques.  Timers are used to assess the difference
  * in performance for each task.  A custom copy constructor has been created
  * for the object to show when it is copied, and a custom destructor for the
  * object shows when it is destroyed (i.e. deleted from memory).  Applicative
- * order evaluation is further represented in the final method call.
+ * order evaluation is further represented in the final function call.
  */
-
 
 class ReallyBigObject {
 public:
 
 	// Initialize object with a very large list of values
+	//**NOTE**: The number of elements might need to be adjusted depending on your machine
 	ReallyBigObject() {
 		doubles = new list<double>(50000000);
 	}
@@ -37,14 +41,14 @@ public:
 		*doubles = *obj.doubles;
 	}
 
-	// This method has no functional purpose.  Used to illustrate applicative
+	// This function has no functional purpose.  Used to illustrate applicative
 	// order parameter evaluation later on.
-	int uselessMethod(int num) {
-		cout << "uselessMethod() called\n";
+	int uselessFunction(int num) {
+		cout << "uselessFunction() called\n";
 		return num;
 	}
 
-	// Simple method to add a number to the object's data structure
+	// Simple function to add a number to the object's data structure
 	void addNum(int num) {
 		doubles->push_back(num);
 	}
@@ -59,7 +63,7 @@ private:
 	list<double> *doubles;
 };
 
-// Pass-by-value will copy the parameter for use within the method body
+// Pass-by-value will copy the parameter for use within the function body
 void passByValue(ReallyBigObject reallyBigObject) {
 	cout << "Returning from passByValue()..." << endl;
 }
@@ -77,15 +81,15 @@ void passByConstReference(const ReallyBigObject &reallyBigObject) {
 	cout << "Returning from passByConstReference()..." << endl;
 }
 
-// This method both passes and returns by value: it copies the parameter to use within
-// the method body, then it creates *another* copy to return to the calling method.
+// This function both passes and returns by value: it copies the parameter to use within
+// the function body, then it creates *another* copy to return to the calling function.
 ReallyBigObject passAndReturnByValue(ReallyBigObject reallyBigObject) {
 	cout << "Returning from passAndReturnByValue()..." << endl;
 	return reallyBigObject;
 }
 
-// This method shows how C++ uses applicative parameter evaluation, as any parameter chosen for
-// unusedParameter will be evaluated prior to entering the method body, even though it is
+// This function shows how C++ uses applicative parameter evaluation, as any parameter chosen for
+// unusedParameter will be evaluated prior to entering the function body, even though it is
 // never used.
 void applicativeEvaluation(const ReallyBigObject &reallyBigObject, int unusedParameter) {
 	cout << "Returning from applicativeEvaluation()..." << endl;
@@ -136,12 +140,12 @@ int main() {
 	cout << "Elapsed time: " << (end - start) << endl << endl;
 
 
-	// Pass the object again by const reference, but include a method call to uselessMethod()
+	// Pass the object again by const reference, but include a function call to uselessFunction()
 	// as part of the passed arguments.  Even though this value is not used in the body of
 	// applicativeEvaluation(), C++ will still evaluate it fully, showing applicative order evaluation
 	cout << "Passing list by const-reference to show applicative order evaluation..." << endl;
 	start = time(0);
-	applicativeEvaluation(reallyBigObject, reallyBigObject.uselessMethod(1));
+	applicativeEvaluation(reallyBigObject, reallyBigObject.uselessFunction(1));
 	end = time(0);
 	cout << "Elapsed time: " << (end - start) << endl << endl;
 }

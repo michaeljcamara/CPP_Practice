@@ -1,3 +1,12 @@
+/*****************************************************************************
+ * Michael Camara
+ * Honor Code Pledge: This work is mine unless otherwise cited
+ * CMPSC220: Final Project (C++)
+ *
+ * Purpose: This file shows how scoping works in C++ by providing many identical
+ * functions that are each nested in different constructs.
+ *****************************************************************************/
+
 #include <iostream>
 
 // A globally accessible namespace with a single nested class
@@ -7,7 +16,7 @@ namespace SomeLibrary {
 class SomeClass {
 
 public:
-	int someMethod() {
+	int someFunction() {
 		x = 5;
 		return x;
 	}
@@ -19,8 +28,8 @@ private:
 // A nested variable within a defined namespace
 int x;
 
-// A nested method within a defined namespace
-int someMethod() {
+// A nested function within a defined namespace
+int someFunction() {
 	x = 10;
 	return x;
 }
@@ -30,7 +39,7 @@ int someMethod() {
 // A locally defined class
 class WithinScopeClass {
 public:
-	int someMethod() {
+	int someFunction() {
 		x = 15;
 		return x;
 	}
@@ -41,28 +50,29 @@ private:
 
 const int x = 100;
 
-int someMethod() {
+int someFunction() {
 	int x = 20;
 	return x;
 }
 
 int main() {
 
-	int x = SomeLibrary::SomeClass().someMethod(); 	// Use :: to target class within namespace
-	std::cout << "x: " << x;						// x = 5
-	int x2 = SomeLibrary::someMethod(); 			// Use :: to target method within namespace
-	std::cout << "\nx2: " << x2;					// x = 10
-	int x3 = WithinScopeClass().someMethod();		// Target method of local class
-	std::cout << "\nx3: " << x3;					// x = 15
-	int x4 = someMethod();							// Target local method
-	std::cout << "\nx4: " << x4;					// x = 20
+	// Note the use of the scope resolution operator (::) to target specific functions
+	int x = SomeLibrary::SomeClass().someFunction();//Target class within SomeLibrary namespace
+	std::cout << "x: " << x;                      //x = 5
+	int x2 = SomeLibrary::someFunction();           //Target function within SomeLibrary namespace
+	std::cout << "\nx2: " << x2;                  //x = 10
+	int x3 = WithinScopeClass().someFunction();     //Target function of class in global namespace
+	std::cout << "\nx3: " << x3;                  //x = 15
+	int x4 = someFunction();                        //Target function in global namespace
+	std::cout << "\nx4: " << x4;                  //x = 20
 
-	// ERROR: SomeClas is nested within SomeLibrary namespace and is out of scope
+	// ERROR: SomeClass is nested within SomeLibrary namespace and is out of scope
 	// unless scope resolution operator ("::") is used to specify namespace
-	//int x = SomeClass().someMethod();
+	//int x = SomeClass().someFunction();
 
 	//ERROR: OutsideScopeClass is not in scope of main() since it is declared lexically after main()
-	//int z = OutsideScopeClass().someMethod();
+	//int z = OutsideScopeClass().someFunction();
 
 	int cout = 1;						// Declare local variable, coincidentally named cout
 	std::cout << "\nLocal x: " << x; 	// Global x being shadowed by local x
@@ -80,10 +90,10 @@ int main() {
 }
 
 // This class is outside of the scope of anything that appears before it lexically,
-// including the main() method.
+// including the main() function.
 class OutsideScopeClass {
 public:
-	int someMethod() {
+	int someFunction() {
 		x = 10;
 		return x;
 	}

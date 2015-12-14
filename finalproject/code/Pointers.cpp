@@ -1,3 +1,12 @@
+/*****************************************************************************
+ * Michael Camara
+ * Honor Code Pledge: This work is mine unless otherwise cited
+ * CMPSC220: Final Project (C++)
+ *
+ * Purpose: This file shows how to use pointers in C++: both in basic ways and
+ * specifically with arrays.
+ *****************************************************************************/
+
 #include <iostream>
 using namespace std;
 
@@ -126,7 +135,7 @@ void arrayPointers() {
 	cout << "pointerC = " << pointerC << endl;
 }
 
-// Main method: begin with simplePointers(), then arrayPointers()
+// Main function: begin with simplePointers(), then arrayPointers()
 int main() {
 	simplePointers();
 	arrayPointers();

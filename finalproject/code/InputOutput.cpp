@@ -1,12 +1,17 @@
+/*****************************************************************************
+ * Michael Camara
+ * Honor Code Pledge: This work is mine unless otherwise cited
+ * CMPSC220: Final Project (C++)
+ *
+ * Purpose: This file shows how input and output are handled by C++
+ *****************************************************************************/
+
 #include <iostream>
 #include <string>
-#include <ostream>
-#include <istream>
-#include <iomanip>
-#include <fstream>
 
 using namespace std;
 
+// Show how cout is used with the insertion operator (<<)
 void simpleOutput() {
 	int num = 10;
 	string name = "Michael";
@@ -39,6 +44,7 @@ void simpleOutput() {
 	cout << "With showpoint: " << showpoint << x << endl;	// output 1.00000
 }
 
+// Show how cin is used with the extraction operator (>>)
 void simpleInput() {
 	cout << "Begin simpleInput():\n";
 
@@ -66,8 +72,11 @@ void simpleInput() {
 			<< "\nFavorite Food: " << food;
 }
 
+// This function shows how some error handling capabilities have been built-into cin
+// NOTE: This example was modified from an original example obtained from Stroustrup (2014) p. 355
+//		(see bibliography in report)
 void inputErrorHandling() {
-	cout << "Begin inputErrorHandling():\n";
+	cout << "\n\nBegin inputErrorHandling():\n";
 	int num;
 
 
@@ -101,13 +110,9 @@ void inputErrorHandling() {
 	}
 }
 
-
+// Execute all three methods in sequence
 int main() {
-
 	simpleOutput();
 	simpleInput();
 	inputErrorHandling();
-
-//	fileInputOutput();
-
 }
