@@ -11,7 +11,7 @@
 
 \title{A Brief Overview of C++}
 \author{Michael Camara\\Honor Code Pledge: This work is mine unless otherwise cited}
-\date{CMPSC 220}
+\date{CMPSC 220: Programming Language Concepts\\December 14, 2015}
 
 \maketitle
 
@@ -181,7 +181,7 @@ The pointer begins at the memory address of the first element in the \texttt{int
 
 \section{Input and Output}
 
-	At first glance, the input and output format of C++ may look strange; but it follows many of the same conventions as other languages.  C++ handles these tasks using streams that are primarily found in the \texttt{iostream} library, although additional libraries like \texttt{ostream, istream, iomanip, fstream}, and others exist for more advanced purposes.  The \texttt{cout} class is used with the insertion (\texttt{<<}) operator to send data to the right of the operator to the output stream.  Conversely, \texttt{cin} is used with the extraction (\texttt{>>}) operator to send data obtained from some input source (typically the keyboard) to be stored as date indicated to the right of the operator.  In both cases, these operators can be "chained" together indefinitely, as shown in Figure 8:
+	At first glance, the input and output format of C++ may look strange; but it follows many of the same conventions as other languages.  C++ handles these tasks using streams that are primarily found in the \texttt{iostream} library, although additional libraries like \texttt{ostream, istream, iomanip, fstream}, and others exist for more advanced purposes.  The \texttt{cout} class is used with the insertion (\texttt{<<}) operator to send data to the right of the operator to the output stream.  Conversely, \texttt{cin} is used with the extraction (\texttt{>>}) operator to send data obtained from some input source (typically the keyboard) to be stored as data indicated to the right of the operator.  In both cases, these operators can be "chained" together indefinitely, as shown in Figure 8:
 	
 \begin{figure}[!h]
 \centering
@@ -216,7 +216,7 @@ if(!cin) {
 	if(cin.eof()) {
 		cout << "End of file reached";
 	}
-	// cin.bad() == true if it encountered some critical error that it likely cannot recover from
+	// cin.bad() == true if unrecoverable critical error
 	else if(cin.bad()) {
 		cerr << "Critical failure, aborting input operation";
 	}
@@ -231,10 +231,10 @@ if(!cin) {
 \end{figure} \FloatBarrier
 
 \noindent
-As this example shows, \texttt{cin} will actually return a true or false value upon completion, indicating whether the stream exited successfully or not.  If it did not exit successfully, then the error can be determined by three other \texttt{cin} functions.  \texttt{cin.eof()} indicates that the end of a file was reached, which would be useful when parsing a collection of tokens to know when input should cease.  \texttt{cin.bad()} indicates when a critical error has occurred that likely cannot be repaired; or, as Stroustrup (2014) describes, "something really nasty, such as a bad risk read, happens" (p. 355).  Finally, \texttt{cin.fail()} usually indicates some type of formatting error that can be caught and corrected, such as trying to insert a token of one type into some incompatible type.
+As this example shows, \texttt{cin} will actually return a true or false value upon completion, indicating whether the stream exited successfully or not.  If it did not exit successfully, then the error can be determined by three other \texttt{cin} functions.  \texttt{cin.eof()} indicates that the end of a file was reached, which would be useful when parsing a collection of tokens to know when input should cease.  \texttt{cin.bad()} indicates when a critical error has occurred that likely cannot be repaired; or, as Stroustrup (2014) describes, "something really nasty, such as a bad disk read, happens" (p. 355).  Finally, \texttt{cin.fail()} usually indicates some type of formatting error that can be caught and corrected, such as trying to insert a token of one type into some incompatible type.
 
 \section{Scope}
-C++ exhibits static, block-level scoping that is very similar to the scoping seen in Java.  The \textit{Scoping.cpp} file provides a number of examples showing how scoping is affected by different constructs.  Importantly, this file contains an example of a namespace, which allows for additional organization by serving as a container for "variables, functions, structures, enumerations, classes, and class and structure members" (Prata, 2012, p. 482).  Specifically, these namespaces were designed to help with name clashes, as seen when multiple libraries are included that may possess constructs bearing the same name.  As seen previously, the scope resolution operator (\texttt{::}) can be used to help target the specific class, or namespace, the might be needed for a particular purpose.  Figure 10 provides a brief snippet of how this operator can be used to isolate \texttt{someFunction()} from a particular namespace:
+C++ exhibits static, block-level scoping that is very similar to the scoping seen in Java.  The \textit{Scoping.cpp} file provides a number of examples showing how scoping is affected by different constructs.  Importantly, this file contains an example of a namespace, which allows for additional organization by serving as a container for "variables, functions, structures, enumerations, classes, and class and structure members" (Prata, 2012, p. 482).  Specifically, these namespaces were designed to help with name clashes, as seen when multiple libraries are included that may possess constructs bearing the same name.  As seen previously, the scope resolution operator (\texttt{::}) can be used to help target the specific class, or namespace, that might be needed for a particular purpose.  Figure 10 provides a brief snippet of how this operator can be used to isolate \texttt{someFunction()} from a particular namespace:
 	
 \begin{figure}[!h]
 \centering
@@ -251,7 +251,7 @@ std::cout << "\nx4: " << x4;                  //x = 20
 \caption{Using the Scope Resolution Operator (::)}
 \end{figure} \FloatBarrier
 
-	Prata (2012) describes two terms relating to scope that help explain how it works in C++.  First, "a declarative region is a region in which declarations can be made;" and second, "the potential scope for a variable begins at its point of declaration and extends to the end of its declarative region" (p. 483).  Creating a new namespace, class, or function introduces a new declarative region in which member names won't conflict within the same namespace.  Further, the potential scope is more limiting than it is in Java: for example, if a function is located at the end of a file, it is considered outside of the potential scope for all constructs located lexically above it.  For this reason the \texttt{main()} function is often located at the end of a file to ensure that no necessary constructs "hide" below it.  Finally, there exists a file-level declarative region known as the global namespace, such that any non-nested construct (class, function, variable, etc.) is considered a member of this global namespace and can be accessed without explicit use of the scope resolution operator, as demonstrated also in Figure 10 (p. 484).
+	Prata (2012) describes two terms relating to scope that help explain how it works in C++.  First, "a declarative region is a region in which declarations can be made;" and second, "the potential scope for a variable begins at its point of declaration and extends to the end of its declarative region" (p. 483).  Creating a new namespace, class, or function introduces a new declarative region in which member names won't conflict within the same namespace.  Further, the potential scope is more limiting than it is in Java: for example, if a function is located at the end of a file, it is considered outside of the potential scope for all constructs located lexically above it.  Finally, there exists a file-level declarative region known as the global namespace, such that any non-nested construct (class, function, variable, etc.) is considered a member of this global namespace and can be accessed without explicit use of the scope resolution operator, as demonstrated also in Figure 10 (p. 484).
 	
 \section{Parameters and Resource Management}
 
@@ -294,7 +294,7 @@ Elapsed time: 20
 
 \section{Multiple Inheritance}
 	
-	C++ further provides utility to programmers by allowing them to use multiple inheritance of classes.  In other languages, like Java, only single inheritance is permitted, whereby each class is only allowed to extend one parent class.  In C++, however, a single class can extend any number of classes, inheriting each of their members.  In \textit{MultipleInheritance.cpp}, several nearly identical parent classes are created (ParentA, ParentB, and ParentC).  Each parent has a function unique to them (\texttt{f(), g(), and h()}), as well as a function that shares the same name across each parent (\texttt{sharedFunction()}.  A Child class is then created using the syntax: \texttt{class Child : public ParentA, public ParentB, public ParentC \{...\}}, which extends each Child with each of the parent classes (note the use of ":" to signify "extends" in C++).  Figure 13 then shows the output from creating a Child object and calling each of its inherited functions:
+	C++ further provides utility to programmers by allowing them to use multiple inheritance of classes.  In other languages, like Java, only single inheritance is permitted, whereby each class is only allowed to extend one parent class.  In C++, however, a single class can extend any number of classes, inheriting each of their members.  In \textit{MultipleInheritance.cpp}, several nearly identical parent classes are created (ParentA, ParentB, and ParentC).  Each parent has a function unique to them (\texttt{f(), g(), and h()}), as well as a function that shares the same name across each parent (\texttt{sharedFunction()}).  A Child class is then created using the syntax: \texttt{class Child : public ParentA, public ParentB, public ParentC \{...\}}, which extends each Child with each of the parent classes (note the use of ":" to signify "extends" in C++).  Figure 13 then shows the output from creating a Child object and calling each of its inherited functions:
 
 \begin{figure}[!h]
 \centering
@@ -316,7 +316,7 @@ Note that the unique functions inherited from the parents (\texttt{f(), g(), and
 
 	C++ clearly offers a variety of useful features that any programmer can utilize.  Although some of the syntax might seem unusual for programmers coming from other object-oriented languages, there are enough familiar elements to allow comprehension of the core features.  Further, C++ gives programmers both high-level and low-level control of their programs, making this language very versatile for those willing to explore its many intricacies.  
 
-
+\newpage
 \section{Bibliography}
 \begin{enumerate}
 	\item Cass, S.  (2015).  The 2015 Top Ten Programming Languages.  IEEE Spectrum.  Retrieved from http://spectrum.ieee.org/computing/software/the-2015-top-ten-programming-languages.
